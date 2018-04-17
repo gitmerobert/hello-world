@@ -1,0 +1,26 @@
+<?php
+/**
+
+* Implements hook_install()
+*/
+function test_feature_install() {
+	//no install hooks
+}
+
+function test_feature_update_7000(&$htdocs) {
+	$terms = array();
+
+	$vocabulary = taxonomy_vocabulary_machine_name_load('test_taxonomy');
+
+	$terms[] = 'Test1';
+	$terms[] = 'Test2';
+	$terms[] = 'Test3';
+
+	foreach ($terms as $name) {
+		$term = new stdClass();
+		$term->vid = $vocabulary->vid;
+		$term->name = $name;
+		taxonomy_term_save($term);
+	}
+	
+}
